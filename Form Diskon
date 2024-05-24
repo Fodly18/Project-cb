@@ -1,0 +1,426 @@
+import java.sql.*;
+import Koneksi.Conek;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+public class Diskon extends javax.swing.JFrame {
+
+   
+    public Diskon() {
+        initComponents();
+        datatable();
+    }
+        public void datatable() {
+    DefaultTableModel tbl = new DefaultTableModel();
+    tbl.addColumn("Kode_Barang");
+    tbl.addColumn("Nama_Barang");
+    tbl.addColumn("Harga");
+    tbl.addColumn("Stock");
+    tbl.addColumn("Jenis");
+    tbl.addColumn("Expired");
+    tabelD.setModel(tbl);
+
+    try {
+        Connection conn = Conek.configDB();
+        if (conn == null) {
+            throw new SQLException("Gagal terhubung ke database.");
+        }
+        
+        Statement statement = conn.createStatement();
+        ResultSet res = statement.executeQuery("SELECT * FROM tbldiskon");
+        
+        while (res.next()) {
+            tbl.addRow(new Object[]{
+                res.getString("Kode_Barang"),
+                res.getString("Nama_Barang"),
+                res.getString("Harga"),
+                res.getString("Stock"),
+                res.getString("Jenis"),
+                res.getString("Expired")
+            });
+        }
+        
+        res.close();
+        statement.close();
+        conn.close();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Unexpected Error: " + e.getMessage());
+    }
+}
+
+
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton26 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
+        tambah = new javax.swing.JButton();
+        jButton33 = new javax.swing.JButton();
+        jButton30 = new javax.swing.JButton();
+        Diskon = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
+        persegi_di_bawh_admin2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelD = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2.setForeground(new java.awt.Color(255, 204, 204));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/[removal 35.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 170));
+
+        jButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 1.png"))); // NOI18N
+        jButton26.setBorderPainted(false);
+        jButton26.setContentAreaFilled(false);
+        jButton26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton26ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, -1, 40));
+
+        jButton31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 4 (2).png"))); // NOI18N
+        jButton31.setBorderPainted(false);
+        jButton31.setContentAreaFilled(false);
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, 40));
+
+        tambah.setText("Tambah");
+        tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahActionPerformed(evt);
+            }
+        });
+        jPanel2.add(tambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 250, -1, -1));
+
+        jButton33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 6.png"))); // NOI18N
+        jButton33.setBorderPainted(false);
+        jButton33.setContentAreaFilled(false);
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton33, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, -1, 40));
+
+        jButton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 5.png"))); // NOI18N
+        jButton30.setBorderPainted(false);
+        jButton30.setContentAreaFilled(false);
+        jButton30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton30ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, -1, -1));
+
+        Diskon.setText("Diskon");
+        Diskon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiskonActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Diskon, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 250, -1, -1));
+
+        Logout.setBackground(new java.awt.Color(255, 255, 255));
+        Logout.setText("LOGOUT");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+        jPanel2.add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 160, 30));
+
+        persegi_di_bawh_admin2.setBackground(new java.awt.Color(255, 204, 204));
+        persegi_di_bawh_admin2.setForeground(new java.awt.Color(255, 204, 204));
+        persegi_di_bawh_admin2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Rectangle 109.png"))); // NOI18N
+        jPanel2.add(persegi_di_bawh_admin2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 200, 540));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/[removal 10.png"))); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 0, 40, 40));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel19.setText("Admin");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, 40));
+
+        tabelD.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "1", "2", "3", "4", "5", "6"
+            }
+        ));
+        tabelD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelDMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelD);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 520, 190));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 814, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        int confirm = JOptionPane.showConfirmDialog(this, "Apakah Anda yakin ingin logout?", "Konfirmasi Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            new login_admin().setVisible(true);
+        }
+    }                                      
+
+    private void DiskonActionPerformed(java.awt.event.ActionEvent evt) {                                       
+         try {
+        // Dapatkan nilai diskon dari pengguna
+        int diskon = Integer.parseInt(JOptionPane.showInputDialog("Masukkan nilai diskon (dalam persen): "));
+        
+        // Ambil indeks baris yang dipilih dari tabel
+        int selectedRow = tabelD.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Pilih barang terlebih dahulu!");
+            return;
+        }
+        
+        // Ambil harga dari tabel
+        double harga = Double.parseDouble(tabelD.getValueAt(selectedRow, 2).toString());
+        
+        // Hitung harga baru setelah diskon
+        double hargaSetelahDiskon = harga - (harga * (diskon / 100.0));
+        
+        // Konversi harga setelah diskon ke integer
+        int hargaInteger = (int) Math.round(hargaSetelahDiskon);
+        
+        // Perbarui harga dalam tabel
+        tabelD.setValueAt(hargaInteger, selectedRow, 2);
+        
+        // Perbarui harga dalam database (jika diperlukan)
+        Connection conn = Conek.configDB();
+        if (conn == null) {
+            throw new SQLException("Gagal terhubung ke database.");
+        }
+        
+        PreparedStatement statement = conn.prepareStatement("UPDATE tbldiskon SET Harga = ? WHERE Kode_Barang = ?");
+        statement.setInt(1, hargaInteger);
+        statement.setString(2, tabelD.getValueAt(selectedRow, 0).toString());
+        statement.executeUpdate();
+        
+        JOptionPane.showMessageDialog(rootPane, "Diskon berhasil diterapkan!");
+        
+        statement.close();
+        conn.close();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(rootPane, "Masukkan nilai diskon dalam format yang benar!");
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(rootPane, "Error: " + e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(rootPane, "Unexpected Error: " + e.getMessage());
+    }
+    }                                      
+
+    private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        this.setVisible(false);
+        new Dashboard_admin().setVisible(true);
+    }                                         
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        this.setVisible(false);
+        new DataSupplier().setVisible(true);
+    }                                         
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        this.setVisible(false);
+        new JabatanKaryawan().setVisible(true);
+    }                                         
+
+    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new laporanSupervisor().setVisible(true);
+    }                                         
+
+    private void tambahActionPerformed(java.awt.event.ActionEvent evt) {                                       
+       int selectedRow = tabelD.getSelectedRow();
+
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(this, "Pilih baris yang ingin dipindahkan terlebih dahulu.");
+        return;
+    }
+
+    String kodeBarang = (String) tabelD.getValueAt(selectedRow, 0); // Asumsikan kolom 0 adalah Kode_Barang
+
+    // Memindahkan data ke tabel barang
+    Connection conn = null;
+    PreparedStatement pstSelect = null;
+    PreparedStatement pstInsert = null;
+    PreparedStatement pstDelete = null;
+    ResultSet rs = null;
+
+    try {
+        conn = Conek.configDB();
+
+        // 1. Pilih data dari tabel tbldiskon
+        String sqlSelect = "SELECT * FROM tbldiskon WHERE Kode_Barang = ?";
+        pstSelect = conn.prepareStatement(sqlSelect);
+        pstSelect.setString(1, kodeBarang);
+        rs = pstSelect.executeQuery();
+
+        if (rs.next()) {
+            // 2. Cek apakah data sudah ada di tabel barang
+            String sqlCheck = "SELECT COUNT(*) FROM barang WHERE Kode_Barang = ?";
+            PreparedStatement pstCheck = conn.prepareStatement(sqlCheck);
+            pstCheck.setString(1, kodeBarang);
+            ResultSet rsCheck = pstCheck.executeQuery();
+            rsCheck.next();
+            int count = rsCheck.getInt(1);
+            rsCheck.close();
+            pstCheck.close();
+
+            if (count == 0) {
+                // 3. Sisipkan data ke tabel barang jika belum ada
+                String sqlInsert = "INSERT INTO barang (Kode_Barang, Nama_Barang, Harga, Stok, Jenis, Expired) VALUES (?, ?, ?, ?, ?, ?)";
+                pstInsert = conn.prepareStatement(sqlInsert);
+                pstInsert.setString(1, rs.getString("Kode_Barang"));
+                pstInsert.setString(2, rs.getString("Nama_Barang"));
+                pstInsert.setString(3, rs.getString("Harga"));
+                pstInsert.setString(4, rs.getString("Stock"));
+                pstInsert.setString(5, rs.getString("Jenis"));
+                pstInsert.setString(6, rs.getString("Expired"));
+                pstInsert.executeUpdate();
+            }
+
+            // 4. Hapus data dari tabel tbldiskon
+            String sqlDelete = "DELETE FROM tbldiskon WHERE Kode_Barang = ?";
+            pstDelete = conn.prepareStatement(sqlDelete);
+            pstDelete.setString(1, kodeBarang);
+            pstDelete.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Data berhasil dipindahkan ke tabel barang.");
+
+            // Perbarui tabel diskon
+            datatable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Data tidak ditemukan.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat memindahkan data: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstSelect != null) pstSelect.close();
+            if (pstInsert != null) pstInsert.close();
+            if (pstDelete != null) pstDelete.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menutup koneksi: " + e.getMessage());
+        }
+    
+}
+
+    }                                      
+
+    private void tabelDMouseClicked(java.awt.event.MouseEvent evt) {                                    
+           
+      
+    }                                   
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Diskon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Diskon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Diskon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Diskon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Diskon().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton Diskon;
+    private javax.swing.JButton Logout;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton33;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel persegi_di_bawh_admin2;
+    private javax.swing.JTable tabelD;
+    private javax.swing.JButton tambah;
+    // End of variables declaration                   
+}
